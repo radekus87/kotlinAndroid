@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="wait_info">Please wait</string>
+    <string name="show_books_fragment">Show books fragment</string>
+    <string name="sgw">Something goes wrong. Please try again later</string>
+    <string name="no_internet_info">No internet connection</string>
+    <string name="no_books_info">No books</string>
+</resources>

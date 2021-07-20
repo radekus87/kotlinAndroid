@@ -6,6 +6,14 @@ buildscript {
         room_version = ROOM_VERSION
         rxkotlin_version = RXKOTLIN_VERSION
         rxandroid_version = RXANDROID_VERSION
+        mockk_version = MOCKK_VERSION
+        mock_web_server_version = MOCK_WEB_SERVER_VERSION
+        retrofit_version = RETROFIT_VERSION
+        core_ktx_version = CORE_KTX_VERSION
+        constrait_layout_version = CONSTRAIT_LAYOUT_VERSION
+        lifecycle_version = LIFECYCLE_VERSION
+        material_design_version = MATERIAL_DESIGN_VERSION
+        app_compat_version = APP_COMPAT_VERSION
 
     }
     repositories {

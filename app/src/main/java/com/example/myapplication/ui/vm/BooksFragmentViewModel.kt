@@ -31,12 +31,14 @@ class BooksFragmentViewModel: ViewModel(), KoinComponent{
             .subscribeBy(
                 onSuccess = {
 
-                    val bookList: ArrayList<BookModel> = ArrayList()
-                    bookList.add(it.book1)
-                    bookList.add(it.book2)
-                    bookList.add(it.book3)
+                    val books: ArrayList<BookModel> = ArrayList()
 
-                    bookRepository.insertAllBooks(bookList)
+                    for ((key, value) in it) {
+                        books.add(value)
+                    }
+
+                    bookRepository.insertAllBooks(books)
+
                 },
                 onError = {
 

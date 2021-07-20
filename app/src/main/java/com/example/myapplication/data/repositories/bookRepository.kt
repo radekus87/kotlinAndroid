@@ -14,7 +14,7 @@ class BookRepository: KoinComponent {
     val bookDao: BookDao by inject()
     val retrofitService: RetrofitService by inject()
 
-    fun fetchAllBooks(libraryId: String): Single<GetBooksReposne> {
+    fun fetchAllBooks(libraryId: String): Single<Map<String,BookModel>> {
         return retrofitService.fetchAllBook(libraryId)
     }
 

@@ -54,8 +54,6 @@ class BooksFragment: DialogFragment() {
     fun initBooksObserver(){
         booksFragmentViewModel.getAllbooks().observe(this, { books ->
 
-            books[0].price
-
             if(books.isNotEmpty()){
                 booksAdapter.setBookList(books as ArrayList<BookModel>)
                 booksRecyclerView.visibility = View.VISIBLE

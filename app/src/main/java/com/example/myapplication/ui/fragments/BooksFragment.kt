@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.domain.model.BookModel
+import com.example.myapplication.domain.entities.Book
 import com.example.myapplication.ui.adapters.BooksAdapter
 import com.example.myapplication.ui.vm.BooksFragmentViewModel
 import com.example.myapplication.utils.GeneralUtils
@@ -55,7 +55,7 @@ class BooksFragment: DialogFragment() {
         booksFragmentViewModel.getAllbooks().observe(this, { books ->
 
             if(books.isNotEmpty()){
-                booksAdapter.setBookList(books as ArrayList<BookModel>)
+                booksAdapter.setBookList(books as ArrayList<Book>)
                 booksRecyclerView.visibility = View.VISIBLE
                 infoTextView.visibility = View.GONE
             }else{
@@ -69,7 +69,9 @@ class BooksFragment: DialogFragment() {
         booksFragmentViewModel.isSuccess.observe(this, {isSuccess ->
 
             if(!isSuccess){
-                Toast.makeText(context, R.string.sgw, Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context, R.string.sgw, Toast.LENGTH_LONG
+                ).show()
             }
         })
     }
@@ -83,7 +85,9 @@ class BooksFragment: DialogFragment() {
         if(GeneralUtils.isInternetConnection(context)){
             booksFragmentViewModel.fetchAllBooks("library")
         }else{
-            Toast.makeText(context, R.string.no_internet_info, Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context, R.string.no_internet_info, Toast.LENGTH_LONG
+            ).show()
         }
     }
 }

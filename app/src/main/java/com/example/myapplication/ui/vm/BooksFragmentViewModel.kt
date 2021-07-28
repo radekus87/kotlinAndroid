@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.repositories.BookRepository
-import com.example.myapplication.domain.model.BookModel
+import com.example.myapplication.domain.entities.Book
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers.io
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ class BooksFragmentViewModel: ViewModel(), KoinComponent{
 
     val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getAllbooks(): LiveData<List<BookModel>>{
+    fun getAllbooks(): LiveData<List<Book>>{
         return bookRepository.getAllBooks()
     }
 
@@ -30,15 +30,7 @@ class BooksFragmentViewModel: ViewModel(), KoinComponent{
             .observeOn(io())
             .subscribeBy(
                 onSuccess = {
-
-                    val books: ArrayList<BookModel> = ArrayList()
-
-                    for ((key, value) in it) {
-                        books.add(value)
-                    }
-
-                    bookRepository.insertAllBooks(books)
-
+                    bookRepository.insertAllBooks(convertMapToArray(it))
                 },
                 onError = {
 
@@ -49,4 +41,15 @@ class BooksFragmentViewModel: ViewModel(), KoinComponent{
                 }
             )
     }
+
+    fun convertMapToArray(it: Map<String, Book>): ArrayList<Book>{
+        val books: ArrayList<Book> = ArrayList()
+
+        for ((key, value) in it) {
+            books.add(value)
+        }
+
+        return books
+    }
+
 }

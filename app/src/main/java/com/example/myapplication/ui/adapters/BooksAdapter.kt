@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.domain.model.BookModel
+import com.example.myapplication.domain.entities.Book
 import kotlinx.android.synthetic.main.book_item.view.*
 
 class BooksAdapter: RecyclerView.Adapter<BooksAdapter.ItemViewHolder>() {
 
-    private val bookList: ArrayList<BookModel> = ArrayList()
+    private val bookList: ArrayList<Book> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
 
@@ -28,7 +28,7 @@ class BooksAdapter: RecyclerView.Adapter<BooksAdapter.ItemViewHolder>() {
         return bookList.size
     }
 
-    fun setBookList(bookList: ArrayList<BookModel>){
+    fun setBookList(bookList: ArrayList<Book>){
         this.bookList.clear()
         this.bookList.addAll(bookList)
         notifyDataSetChanged()
@@ -37,8 +37,8 @@ class BooksAdapter: RecyclerView.Adapter<BooksAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        fun setBook(bookModel: BookModel){
-            itemView.titleTextView.text = bookModel.title
+        fun setBook(book: Book){
+            itemView.titleTextView.text = book.title
         }
 
     }

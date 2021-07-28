@@ -4,25 +4,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.fragments.BooksFragment
 import com.example.myapplication.ui.vm.MainActivityViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private val mainActivityViewModel: MainActivityViewModel by inject()
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         initShowBooksButtonListener()
     }
 
 
     private fun initShowBooksButtonListener(){
-        showBooksFragmentButton.setOnClickListener {
+        binding.showBooksFragmentButton.setOnClickListener {
             showBooksFragmentFragment()
         }
     }

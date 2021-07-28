@@ -6,17 +6,21 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.ui.vm.LoginActivityViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
 
     private val loginActivityViewModel: LoginActivityViewModel by inject()
 
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initOnLogInButtonListener()
         initDoneListenerOnPasswordEditText()
@@ -24,30 +28,30 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun initOnLogInButtonListener(){
-        logInButton.setOnClickListener {
+        binding.logInButton.setOnClickListener {
             onLogInButtonCLick()
         }
     }
 
     fun onLogInButtonCLick(){
-        if(loginEditText.text.isEmpty()){
-            Toast.makeText(this, "Podaj login!", Toast.LENGTH_LONG).show()
+        if(binding.loginEditText.text.isEmpty()){
+            Toast.makeText(this, getString(R.string.enter_password), Toast.LENGTH_LONG).show()
             return
         }
 
-        if(passwordEditText.text.isEmpty()){
-            Toast.makeText(this, "Podaj hasło!", Toast.LENGTH_LONG).show()
+        if(binding.passwordEditText.text.isEmpty()){
+            Toast.makeText(this, getString(R.string.enter_password), Toast.LENGTH_LONG).show()
             return
         }
 
         loginActivityViewModel.login(
-            loginEditText.text.toString(),
-            passwordEditText.text.toString()
+            binding.loginEditText.text.toString(),
+            binding.passwordEditText.text.toString()
         )
     }
 
     fun initDoneListenerOnPasswordEditText(){
-        passwordEditText.setOnEditorActionListener { v, actionId, event ->
+        binding.passwordEditText.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_DONE){
                 onLogInButtonCLick()
                 true

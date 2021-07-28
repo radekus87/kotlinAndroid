@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.databinding.BooksFragmentBinding
 import com.example.myapplication.domain.entities.Book
 import com.example.myapplication.ui.adapters.BooksAdapter
 import com.example.myapplication.ui.vm.BooksFragmentViewModel
@@ -20,6 +21,8 @@ class BooksFragment: DialogFragment() {
 
     private val booksFragmentViewModel: BooksFragmentViewModel by inject()
     private val booksAdapter: BooksAdapter by inject()
+    private lateinit var binding: BooksFragmentBinding
+
 
     companion object{
         fun newInstance(): BooksFragment{
@@ -42,13 +45,14 @@ class BooksFragment: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView: View = inflater.inflate(R.layout.books_fragment, container,  false)
 
-        initBooksRecyclerView(rootView)
+        binding = BooksFragmentBinding.inflate(inflater)
+
+        initBooksRecyclerView(binding.root)
         initBooksObserver()
         initSuccessBookFetchObserver()
 
-        return rootView
+        return binding.root
     }
 
     fun initBooksObserver(){

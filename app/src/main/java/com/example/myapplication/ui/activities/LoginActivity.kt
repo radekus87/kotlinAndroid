@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun onLogInButtonCLick(){
         if(binding.loginEditText.text.isEmpty()){
-            Toast.makeText(this, getString(R.string.enter_password), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.enter_login), Toast.LENGTH_LONG).show()
             return
         }
 
